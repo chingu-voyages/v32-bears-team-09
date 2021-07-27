@@ -3,11 +3,16 @@ import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+//Components
 import Navbar from '../Navbar/Navbar';
+
+//Pages
 import Homepage from '../../pages/Homepage/Homepage'
 import Playlists from '../../pages/Playlists/Playlists'
 import FriendList from '../../pages/FriendList/FriendList'
 import Friend from '../../pages/Friend/Friend'
+import FeedPage from '../../pages/FeedPage/FeedPage'
+import LoginRegister from '../../pages/LoginRegister/LoginRegister'
 
 function App() {
   return (
@@ -19,7 +24,9 @@ function App() {
           <Route exact path="/"  component={Homepage}/>
           <Route path="/playlists" component={Playlists}/>
           <Route exact path="/friendlist" component={FriendList}/>
+          <Route path ="/activityfeed" component={FeedPage} />
           <Route path="/shop/:id" component={Friend}/>
+          <Route path="/login" component={LoginRegister}/>
         </Switch>
       </div>
     </Router>

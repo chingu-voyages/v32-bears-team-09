@@ -16,6 +16,12 @@ const Navbar = () => {
                 <Link to='/friendlist'>
                     <li>Friend List</li>
                 </Link>
+                <Link to='/activityfeed'>
+                    <li> Friend Feed</li>
+                </Link>
+                <Link to='/login'>
+                    <li>Login </li>
+                </Link>
            </ul>
         </nav>
     )
