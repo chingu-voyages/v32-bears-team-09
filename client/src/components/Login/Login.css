@@ -1,0 +1,50 @@
+.container{
+    display:flex;
+    justify-content: center;
+    padding-top: 3%;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    width: 60%;
+    border-collapse:separate;
+    border-radius: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.splashColumn {
+    background: white;
+    height: 70vh;
+    border-radius: 15px 0 0 15px;
+}
+
+.loginColumn{
+    background-color:white;
+    height: 70vh;
+    border-radius: 0 15px 15px 0;
+    justify-content: center;
+    align-items: center;
+    display:flex
+}
+
+.auth{
+    background-color:#1DB954;
+    padding: 2%;
+    border:none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 900;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.auth:active{
+    transform:scale(0.95)
+}
