@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Components
 import Navbar from '../Navbar/Navbar';
+import Player from '../Player/Player';
 
 //Pages
 import Homepage from '../../pages/Homepage/Homepage'
@@ -28,6 +29,9 @@ function App() {
           <Route path="/shop/:id" component={Friend}/>
           <Route path="/login" component={LoginRegister}/>
         </Switch>
+        <div className="MediaPlayer">
+          <Player />
+        </div>
       </div>
     </Router>
   );

@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Login.css'
 
+const SPOTIFY_URL = "https://accounts.spotify.com/authorize?client_id=545bc37c391746368c3e07cef94bfd51&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
 const Login = () => {
     return (
         <div className = "container">
@@ -11,7 +12,7 @@ const Login = () => {
                 </div>
                 <div className = "column">
                     <div className = "loginColumn">
-                        <button className="auth">Login with spotify</button>
+                        <a className="auth" href={SPOTIFY_URL}>Login with spotify</a>
                     </div>
                 </div>
             </div>
