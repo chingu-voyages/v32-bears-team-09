@@ -14,21 +14,27 @@ app.listen(PORT, () => console.log(`Server connected to port ${PORT}`))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use((req, res, next) => { 
-    const token = req.headers.token.split(" ")[1]
-    if (token) {
-        jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
-            if (err) {
-                return next()
-            }
-            User.findOne({
-                where: { id: decoded.id }
-            }).then(user => {
-                req.user = user
-                return next()
-            })
-        })
-    } else {
-        return next()
-    }
-})
+// app.use((req, res, next) => { 
+//     const token = req.headers.token.split(" ")[1]
+//     if (token) {
+//         jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+//             if (err) {
+//                 return next()
+//             }
+//             User.findOne({
+//                 where: { id: decoded.id }
+//             }).then(user => {
+//                 req.user = user
+//                 return next()
+//             })
+//         })
+//     } else {
+//         return next()
+//     } 
+// })
+
+app.use('/api', require('./routes/api'))
+
+sessionStore
+  .sync()
+  .then(() => db.sync())

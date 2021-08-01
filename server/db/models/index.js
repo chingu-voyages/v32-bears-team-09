@@ -1,8 +1,8 @@
-// associations will be made here
-// ex:
-// import Profile from './profile'
-// import User from './user'
-// import Comment from './comment'
+const User = require('./user')
 
-// User.hasMany(Comment)
-// Profile.belongsTo(User);
+// model associations will go here
+
+
+module.exports = {
+    User
+}
