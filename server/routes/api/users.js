@@ -9,11 +9,21 @@ const saltRounds = 10
 router.post('/register', async (req, res) => {
   try {
     const { username, password, email } = req.body
-
     if (!username || !password || !email) {
       return res
         .status(400)
         .json({ error: 'Username, password, and email required' })
+    }
+
+    let user = await User.findOne({
+      where: {
+        username: username
+      }
+    })
+    if (user) {
+      return res
+        .status(400)
+        .json({ error: 'User already exists' })
     }
 
     const salt = bcrypt.genSaltSync(saltRounds)
@@ -23,8 +33,7 @@ router.post('/register', async (req, res) => {
       password: hash,
       email,
     }
-
-    const user = await User.create(userBody)
+    user = await User.create(userBody)
     const token = jwt.sign(
       { id: user.id },
       process.env.SESSION_SECRET,
@@ -40,6 +49,11 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body
+    if (!username || !password ) {
+      return res
+        .status(400)
+        .json({ error: 'Username and password required' })
+    }
 
     const user = await User.findOne({
       where: {
@@ -47,11 +61,9 @@ router.post('/login', async (req, res) => {
       }
     })
     if (!user) {
-      console.log({ error: 'Username not found' })
       res.status(401).json({ error: "Wrong username and/or password" })
     } else {
       if (!bcrypt.compareSync(password, user.password)) {
-        console.log({ error: 'Wrong username and/or password' })
         res.status(401).json({ error: "Wrong username and/or password" })
       } else {
         const token = jwt.sign(

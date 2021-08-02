@@ -7,11 +7,6 @@ const Profile = db.define("profile", {
     unique: true,
     allowNull: false
   },
-  userId: {
-    type: Sequelize.INTEGER,
-    unique: true,
-    allowNull: false
-  },
   spotify: {
     type: Sequelize.STRING,
     allowNull: true
