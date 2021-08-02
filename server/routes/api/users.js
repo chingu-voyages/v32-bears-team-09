@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { User } = require('../../db/models')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const saltRounds = 10
 
@@ -23,8 +24,13 @@ router.post('/register', async (req, res) => {
       email,
     }
 
-    user = await User.create(userBody)
-    res.json(user)
+    const user = await User.create(userBody)
+    const token = jwt.sign(
+      { id: user.id },
+      process.env.SESSION_SECRET,
+      { expiresIn: 86400 }
+    )
+    res.json({ user, token })
   } catch (error) {
     res.status(401)
   }
@@ -47,11 +53,17 @@ router.post('/login', async (req, res) => {
         console.log({ error: 'Wrong username and/or password' })
         res.status(401).json({ error: "Wrong username and/or password" })
       } else {
-        res.json(user)
+        const token = jwt.sign(
+          { id: user.id },
+          process.env.SESSION_SECRET,
+          { expiresIn: 86400 }
+        )
+        res.json({ user, token })
       }
     }
-
-  } catch (error) {}
+  } catch (error) {
+    res.status(401)
+  }
 })
 
 module.exports = router
