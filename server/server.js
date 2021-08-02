@@ -1,20 +1,21 @@
-const createError = require('http-errors')
-const express = require('express')
-const jwt = require('jsonwebtoken')
-const session = require('express-session')
+require("dotenv").config();
+const createError = require("http-errors");
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db = require("./db");
 const { User } = require("./db/models");
 
-const sessionStore = new SequelizeStore({ db })
+const sessionStore = new SequelizeStore({ db });
 
-const app = express()
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => console.log(`Server connected to port ${PORT}`))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+const app = express();
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server connected to port ${PORT}`));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// app.use((req, res, next) => { 
+// app.use((req, res, next) => {
 //     const token = req.headers.token.split(" ")[1]
 //     if (token) {
 //         jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
@@ -30,11 +31,10 @@ app.use(express.urlencoded({ extended: false }))
 //         })
 //     } else {
 //         return next()
-//     } 
+//     }
 // })
 
-app.use('/api', require('./routes/api'))
+app.use("/api", require("./routes/api"));
 
-sessionStore
-  .sync()
-  .then(() => db.sync())
+sessionStore.sync().then(() => db.sync());
+
