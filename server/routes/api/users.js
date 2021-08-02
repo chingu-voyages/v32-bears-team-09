@@ -37,7 +37,11 @@ router.post('/register', async (req, res) => {
       process.env.SESSION_SECRET,
       { expiresIn: 86400 }
     )
-    res.json({ user, token })
+    res.json({ 
+      username: user.username,
+      email: user.email,
+      token
+    })
   } catch (error) {
     res.status(401)
   }
@@ -72,7 +76,11 @@ router.post('/login', async (req, res) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       )
-      res.json({ user, token })
+      res.json({ 
+        username: user.username,
+        email: user.email,
+        token
+      })
     }
   } catch (error) {
     res.status(401)
