@@ -3,8 +3,6 @@ const { User } = require('../../db/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const saltRounds = 10
-
 // Register User
 router.post('/register', async (req, res) => {
   try {
@@ -26,14 +24,14 @@ router.post('/register', async (req, res) => {
         .json({ error: 'User already exists' })
     }
 
-    const salt = bcrypt.genSaltSync(saltRounds)
-    const hash = bcrypt.hashSync(password, salt)
-    const userBody = {
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+
+    user = await User.create({
       username,
       password: hash,
       email,
-    }
-    user = await User.create(userBody)
+    })
     const token = jwt.sign(
       { id: user.id },
       process.env.SESSION_SECRET,
@@ -61,18 +59,20 @@ router.post('/login', async (req, res) => {
       }
     })
     if (!user) {
+      return res
+        .status(401)
+        .json({ error: "Wrong username and/or password" })
+    }
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
       res.status(401).json({ error: "Wrong username and/or password" })
     } else {
-      if (!bcrypt.compareSync(password, user.password)) {
-        res.status(401).json({ error: "Wrong username and/or password" })
-      } else {
-        const token = jwt.sign(
-          { id: user.id },
-          process.env.SESSION_SECRET,
-          { expiresIn: 86400 }
-        )
-        res.json({ user, token })
-      }
+      const token = jwt.sign(
+        { id: user.id },
+        process.env.SESSION_SECRET,
+        { expiresIn: 86400 }
+      )
+      res.json({ user, token })
     }
   } catch (error) {
     res.status(401)

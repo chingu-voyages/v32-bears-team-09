@@ -15,7 +15,7 @@ const db = new Sequelize(
   }
 );
 
-const test = async () => {
+const testDBConnection = async () => {
   try {
     await db.authenticate();
     console.log("Connected to database");
@@ -23,7 +23,7 @@ const test = async () => {
     console.error("Unable to connect to the database:", error);
   }
 };
-test();
+testDBConnection();
 
 module.exports = db;
 
