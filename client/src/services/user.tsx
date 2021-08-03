@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-//returns own profile info
+//GET https://api.spotify.com/v1/me
 const getProfile = () => {
 
 }
 
-//returns another user's info (viewing their profile)
+//GET https://api.spotify.com/v1/users/{user_id}
 const getUserProfile = () => {
 
 }
