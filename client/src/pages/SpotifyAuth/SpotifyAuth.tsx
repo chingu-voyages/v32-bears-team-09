@@ -31,7 +31,6 @@ const SpotifyAuth = ({ location }: { location: Record<any, string> }) => {
   if (!token) {
     return <div>Receiving token... </div>;
   } else {
-    localStorage.setItem("spotifysocial_token", token);
     return <Redirect to="/" />;
   }
 };
