@@ -1,0 +1,86 @@
+{
+    "items": [
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/12bRwsfndjE8B5xcBfL3hz"
+        },
+        "href": "https://api.spotify.com/v1/playlists/12bRwsfndjE8B5xcBfL3hz",
+        "id": "12bRwsfndjE8B5xcBfL3hz",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://mosaic.scdn.co/640/ab67616d0000b273276bab7245e47ad46ab51e14ab67616d0000b2739617e073fdf56fe1e89467b9ab67616d0000b273bec324cc4de2f3b955c8506cab67616d0000b273d95fce0780bab8bc232b231c",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://mosaic.scdn.co/300/ab67616d0000b273276bab7245e47ad46ab51e14ab67616d0000b2739617e073fdf56fe1e89467b9ab67616d0000b273bec324cc4de2f3b955c8506cab67616d0000b273d95fce0780bab8bc232b231c",
+            "width": 300
+          },
+          {
+            "height": 60,
+            "url": "https://mosaic.scdn.co/60/ab67616d0000b273276bab7245e47ad46ab51e14ab67616d0000b2739617e073fdf56fe1e89467b9ab67616d0000b273bec324cc4de2f3b955c8506cab67616d0000b273d95fce0780bab8bc232b231c",
+            "width": 60
+          }
+        ],
+        "name": "lofi study",
+        "owner": {
+          "display_name": "aaronv93",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/aaronv93"
+          },
+          "href": "https://api.spotify.com/v1/users/aaronv93",
+          "id": "aaronv93",
+          "type": "user",
+          "uri": "spotify:user:aaronv93"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "MjksMDFhMjU0Mzc3MGMxM2I2NGM5NWZjZjVjNzFhNDZhMjc5YmVhYzY1MQ==",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/12bRwsfndjE8B5xcBfL3hz/tracks",
+          "total": 27
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:12bRwsfndjE8B5xcBfL3hz"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/309UrxBg3E56rNCHHSvgGe"
+        },
+        "href": "https://api.spotify.com/v1/playlists/309UrxBg3E56rNCHHSvgGe",
+        "id": "309UrxBg3E56rNCHHSvgGe",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2737494f233da650f9dec4f5db9",
+            "width": 640
+          }
+        ],
+        "name": "Test Playlist",
+        "owner": {
+          "display_name": "aaronv93",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/aaronv93"
+          },
+          "href": "https://api.spotify.com/v1/users/aaronv93",
+          "id": "aaronv93",
+          "type": "user",
+          "uri": "spotify:user:aaronv93"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "MywyY2IyMjQ1ZmJlMjA2YzVjZmQyYmMxNGZmOGJmYzYzZWE4NjFhMjM3",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/309UrxBg3E56rNCHHSvgGe/tracks",
+          "total": 1
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:309UrxBg3E56rNCHHSvgGe"
+      }
+    ]
+}

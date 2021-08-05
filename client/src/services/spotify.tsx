@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-//return results from search bar
+//GET https://api.spotify.com/v1/search
+//https://developer.spotify.com/documentation/web-api/reference/#category-search
 const searchResults = () => {
 
 }
 
-// return data for an artist's page
+// GET https://api.spotify.com/v1/artists/{id}
+// https://developer.spotify.com/documentation/web-api/reference/#category-artists
 const getArtist = () => {
 
 }

@@ -1,5 +1,7 @@
+
 import React from 'react';
 import './App.css';
+
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -14,7 +16,7 @@ import FriendList from '../../pages/FriendList/FriendList'
 import Friend from '../../pages/Friend/Friend'
 import FeedPage from '../../pages/FeedPage/FeedPage'
 import LoginRegister from '../../pages/LoginRegister/LoginRegister'
-
+require ('dotenv').config()
 function App() {
   return (
     <Router>
