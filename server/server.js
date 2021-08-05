@@ -1,37 +1,39 @@
-require('dotenv').config()
-const createError = require('http-errors')
-const express = require('express')
-const jwt = require('jsonwebtoken')
-const session = require('express-session')
-const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const db = require('./db')
-const { User } = require('./db/models')
+require("dotenv").config();
+const createError = require("http-errors");
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const db = require("./db");
+const { User } = require("./db/models");
+const cors = require("cors");
 
-const sessionStore = new SequelizeStore({ db })
+const sessionStore = new SequelizeStore({ db });
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
-const app = express()
+const app = express();
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]
+  const token = req.headers.authorization?.split(" ")[1];
   if (token) {
     jwt.verify(token, process.env.SESSION_SECRET, async (err, decoded) => {
-      if (err) return next()
-      const user = await User.findOne({ where: { id: decoded.id } })
-      req.user = user
-      return next()
-    })
+      if (err) return next();
+      const user = await User.findOne({ where: { id: decoded.id } });
+      req.user = user;
+      return next();
+    });
   } else {
-    return next()
+    return next();
   }
-})
+});
 
-app.use('/api', require('./routes/api'))
+app.use("/api", require("./routes/api"));
 
-sessionStore.sync().then(() => db.sync())
+sessionStore.sync().then(() => db.sync());
