@@ -3,17 +3,24 @@ const Sequelize = require("sequelize");
 // const db = new Sequelize("postgres://localhost:5432/spotifysocial", {
 //     logging: false
 // })
-const db = new Sequelize(
-  process.env.DATABASE,
-  process.env.DB_USERNAME,
-  process.env.DB_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "postgres",
-    port: 5432,
-    logging: false
-  }
-);
+
+let db;
+if (!process.env.DATABASE) {
+  console.log("using in-memory database");
+  db = new Sequelize("sqlite::memory:", { logging: false });
+} else {
+  db = new Sequelize(
+    process.env.DATABASE,
+    process.env.DB_USERNAME,
+    process.env.DB_PASSWORD,
+    {
+      host: "localhost",
+      dialect: "postgres",
+      port: 5432,
+      logging: false,
+    }
+  );
+}
 
 const testDBConnection = async () => {
   try {
@@ -26,4 +33,3 @@ const testDBConnection = async () => {
 testDBConnection();
 
 module.exports = db;
-
