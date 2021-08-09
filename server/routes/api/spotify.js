@@ -1,15 +1,13 @@
 const SpotifyWebApi = require("spotify-web-api-node");
+const credentials = {
+  clientId: process.env.SPOTIFY_CLIENT_ID,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+  redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+};
+const spotifyApi = new SpotifyWebApi(credentials);
 
 const fetch_spotify_token = (req, res) => {
-  const credentials = {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
-  };
-
   const { code } = req.body;
-
-  const spotifyApi = new SpotifyWebApi(credentials);
 
   spotifyApi.authorizationCodeGrant(code).then(
     (data) => {
@@ -31,12 +29,6 @@ const search_artists = (req, res) => {
   const token = authHeader && authHeader.split(" ")[1];
   const { query } = req.body;
 
-  const credentials = {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
-  };
-  const spotifyApi = new SpotifyWebApi(credentials);
   spotifyApi.setAccessToken(token);
 
   spotifyApi.searchArtists(query).then(
@@ -55,12 +47,6 @@ const me = (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  const credentials = {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
-  };
-  const spotifyApi = new SpotifyWebApi(credentials);
   spotifyApi.setAccessToken(token);
 
   spotifyApi.getMe().then(
@@ -79,12 +65,6 @@ const my_playlists = async (req, res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  const credentials = {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
-  };
-  const spotifyApi = new SpotifyWebApi(credentials);
   spotifyApi.setAccessToken(token);
 
   const user = await spotifyApi.getMe().then(
