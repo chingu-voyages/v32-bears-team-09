@@ -75,6 +75,44 @@ const me = (req, res) => {
   );
 };
 
+const my_playlists = async (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  const credentials = {
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+  };
+  const spotifyApi = new SpotifyWebApi(credentials);
+  spotifyApi.setAccessToken(token);
+
+  const user = await spotifyApi.getMe().then(
+    (data) => {
+      console.log("Some information about the authenticated user", data.body);
+      return data.body;
+    },
+    (err) => {
+      console.log("Something went wrong!", err);
+      res.status(400).send(err);
+    }
+  );
+
+  if (user.id) {
+    spotifyApi.getUserPlaylists(user.id).then(
+      (data) => {
+        console.log("Retrieved playlists", data.body);
+        res.status(200).send(data.body);
+      },
+      (err) => {
+        console.log("Something went wrong!", err);
+        res.status(400).send(err);
+      }
+    );
+  }
+};
+
 exports.me = me;
+exports.my_playlists = my_playlists;
 exports.search_artists = search_artists;
 exports.fetch_spotify_token = fetch_spotify_token;
