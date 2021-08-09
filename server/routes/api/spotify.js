@@ -26,4 +26,30 @@ const fetch_spotify_token = (req, res) => {
   );
 };
 
+const search_artists = (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const { query } = req.body;
+
+  const credentials = {
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+  };
+  const spotifyApi = new SpotifyWebApi(credentials);
+  spotifyApi.setAccessToken(token);
+
+  spotifyApi.searchArtists(query).then(
+    (data) => {
+      res.status(200).send(data.body);
+      console.log('Search artists by "Love"', data.body);
+    },
+    (err) => {
+      console.error(err);
+      res.status(400).send(err);
+    }
+  );
+};
+
+exports.search_artists = search_artists;
 exports.fetch_spotify_token = fetch_spotify_token;
