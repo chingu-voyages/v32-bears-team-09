@@ -24,6 +24,7 @@
     "pg-hstore": "^2.3.4",
     "qs": "^6.7.0",
     "sequelize": "^6.6.5",
+    "spotify-web-api-node": "^5.0.2",
     "sqlite3": "^5.0.2"
   }
 }
