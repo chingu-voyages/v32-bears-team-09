@@ -10,6 +10,8 @@ router.post("/search_artists", require("./spotify").search_artists);
 router.post("/me", require("./spotify").me);
 router.post("/me/playlists", require("./spotify").my_playlists);
 
+router.post("/get_playlist", require("./spotify").get_playlist);
+
 router.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;
