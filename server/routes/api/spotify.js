@@ -92,7 +92,27 @@ const my_playlists = async (req, res) => {
   }
 };
 
+const get_playlist = (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const { query } = req.body;
+
+  spotifyApi.setAccessToken(token);
+
+  spotifyApi.getPlaylist(query).then(
+    (data) => {
+      res.status(200).send(data.body);
+      console.log("Playlist Info:", data.body);
+    },
+    (err) => {
+      console.error(err);
+      res.status(400).send(err);
+    }
+  );
+};
+
 exports.me = me;
 exports.my_playlists = my_playlists;
+exports.get_playlist = get_playlist;
 exports.search_artists = search_artists;
 exports.fetch_spotify_token = fetch_spotify_token;
